@@ -1,10 +1,10 @@
-package datameshmanager.hive;
+package entropydata.hive;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.time.Duration;
 
-@ConfigurationProperties(prefix = "datameshmanager.client.hive")
+@ConfigurationProperties(prefix = "entropydata.client.hive")
 public record HiveProperties(
         ConnectionProperties connection,
         AssetsProperties assets

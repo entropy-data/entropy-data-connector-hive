@@ -5,16 +5,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.5</version>
+        <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.datamesh-manager</groupId>
-    <artifactId>datamesh-manager-connector-hive</artifactId>
+    <groupId>com.entropy-data</groupId>
+    <artifactId>entropy-data-connector-hive</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>datamesh-manager-connector-hive</name>
-    <description>DataMesh Manager Connector for Hive</description>
+    <name>entropy-data-connector-hive</name>
+    <description>Entropy Data Connector for Hive</description>
     <properties>
-        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -29,9 +28,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.datamesh-manager</groupId>
-            <artifactId>datamesh-manager-sdk</artifactId>
-            <version>0.0.4</version>
+            <groupId>com.entropy-data</groupId>
+            <artifactId>entropy-data-sdk</artifactId>
+            <version>0.1.2</version>
         </dependency>
 
         <!-- Test dependencies -->
@@ -80,7 +79,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>datameshmanager.hive.Application</mainClass>
+                    <mainClass>entropydata.hive.Application</mainClass>
                     <layout>JAR</layout>
                     <additionalProperties>
                         <loader.path>lib/</loader.path>

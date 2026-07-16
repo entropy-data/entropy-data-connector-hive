@@ -1,11 +1,11 @@
-Data Mesh Manager Connector for Hive
+Entropy Data Connector for Hive
 ===
 
-The connector for Hive-compatible systems is a Spring Boot application that uses the [datamesh-manager-sdk](https://github.com/datamesh-manager/datamesh-manager-sdk) internally, and is available as a ready-to-use Docker image [datameshmanager/datamesh-manager-connector-hive](https://hub.docker.com/r/datameshmanager/datamesh-manager-connector-hive) to be deployed in your environment. This connector allows DataMesh Manager to synchronize assets from Hive-compatible systems via JDBC. It supports Apache Hive, Apache Impala, and other Hive-compatible systems.
+The connector for Hive-compatible systems is a Spring Boot application that uses the [entropy-data-sdk](https://github.com/entropy-data/entropy-data-sdk) internally, and is available as a ready-to-use Docker image [entropydata/entropy-data-connector-hive](https://hub.docker.com/r/entropydata/entropy-data-connector-hive) to be deployed in your environment. This connector allows Entropy Data to synchronize assets from Hive-compatible systems via JDBC. It supports Apache Hive, Apache Impala, and other Hive-compatible systems.
 
 ## Features
 
-- **Asset Synchronization**: Sync tables and schemas from Hive-compatible systems to the Data Mesh Manager as Assets via JDBC
+- **Asset Synchronization**: Sync tables and schemas from Hive-compatible systems to the Entropy Data as Assets via JDBC
 - **Database Discovery**: Discovers databases, tables, and columns from Apache Hive, Apache Impala, and other Hive-compatible systems
 - **Hierarchical Relationships**: Creates hierarchical asset relationships (database → table)
 - **Detailed Table Information**: Supports parsing and storing detailed table metadata
@@ -17,34 +17,34 @@ Start the connector using Docker. You must pass the API keys and connection deta
 
 ```
 docker run \
-  -e DATAMESHMANAGER_CLIENT_APIKEY='insert-api-key-here' \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_HOST='your-hive-host' \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PORT=10000 \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_USERNAME='your-username' \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PASSWORD='your-password' \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_JDBC_URL='jdbc:hive2://your-hive-host:10000/default' \
-  datameshmanager/datamesh-manager-connector-hive:latest
+  -e ENTROPYDATA_CLIENT_APIKEY='insert-api-key-here' \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_HOST='your-hive-host' \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_PORT=10000 \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_USERNAME='your-username' \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_PASSWORD='your-password' \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_JDBC_URL='jdbc:hive2://your-hive-host:10000/default' \
+  entropydata/entropy-data-connector-hive:latest
 ```
 
 ## Configuration
 
 | Environment Variable | Default Value | Description |
 |----------------------|---------------|-------------|
-| `DATAMESHMANAGER_CLIENT_HOST` | `https://api.datamesh-manager.com` | Base URL of the Data Mesh Manager API. |
-| `DATAMESHMANAGER_CLIENT_APIKEY` | | API key for authenticating requests to the Data Mesh Manager. |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_HOST` | `localhost` | Hive server hostname. |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PORT` | `10000` | Hive server port. |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_DATABASE` | `default` | Default database. |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_USERNAME` | | Username for authentication. |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PASSWORD` | | Password for authentication. |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_DRIVER_CLASS_NAME` | `org.apache.hive.jdbc.HiveDriver` | JDBC driver class name. |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_JDBC_URL` | `jdbc:hive2://localhost:10000/default` | Full JDBC connection URL. |
-| `DATAMESHMANAGER_CLIENT_HIVE_ASSETS_CONNECTORID` | `hive-assets` | Identifier for the Hive assets connector. |
-| `DATAMESHMANAGER_CLIENT_HIVE_ASSETS_ENABLED` | `true` | Indicates whether Hive asset tracking is enabled. |
-| `DATAMESHMANAGER_CLIENT_HIVE_ASSETS_POLLINTERVAL` | `PT10M` | Polling interval for Hive asset updates, in ISO 8601 duration format. |
-| `DATAMESHMANAGER_CLIENT_HIVE_ASSETS_DETAILED_TABLE_INFO` | `json` | How to handle detailed table information: `json`, `raw`, or `ignore`. |
-| `DATAMESHMANAGER_CLIENT_HIVE_ASSETS_ID_PREFIX` | `hive-` | Prefix for all asset IDs. |
-| `DATAMESHMANAGER_CLIENT_HIVE_ASSETS_OWNER` | | Default owner team ID for all assets. |
+| `ENTROPYDATA_CLIENT_HOST` | `https://api.entropy-data.com` | Base URL of the Entropy Data API. |
+| `ENTROPYDATA_CLIENT_APIKEY` | | API key for authenticating requests to the Entropy Data. |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_HOST` | `localhost` | Hive server hostname. |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_PORT` | `10000` | Hive server port. |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_DATABASE` | `default` | Default database. |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_USERNAME` | | Username for authentication. |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_PASSWORD` | | Password for authentication. |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_DRIVER_CLASS_NAME` | `org.apache.hive.jdbc.HiveDriver` | JDBC driver class name. |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_JDBC_URL` | `jdbc:hive2://localhost:10000/default` | Full JDBC connection URL. |
+| `ENTROPYDATA_CLIENT_HIVE_ASSETS_CONNECTORID` | `hive-assets` | Identifier for the Hive assets connector. |
+| `ENTROPYDATA_CLIENT_HIVE_ASSETS_ENABLED` | `true` | Indicates whether Hive asset tracking is enabled. |
+| `ENTROPYDATA_CLIENT_HIVE_ASSETS_POLLINTERVAL` | `PT10M` | Polling interval for Hive asset updates, in ISO 8601 duration format. |
+| `ENTROPYDATA_CLIENT_HIVE_ASSETS_DETAILED_TABLE_INFO` | `json` | How to handle detailed table information: `json`, `raw`, or `ignore`. |
+| `ENTROPYDATA_CLIENT_HIVE_ASSETS_ID_PREFIX` | `hive-` | Prefix for all asset IDs. |
+| `ENTROPYDATA_CLIENT_HIVE_ASSETS_OWNER` | | Default owner team ID for all assets. |
 
 
 ## Supported Systems
@@ -59,7 +59,7 @@ docker run \
 - Java 17+
 - Maven 3.6+
 - Access to a Hive-compatible system
-- DataMesh Manager API access
+- Entropy Data API access
 
 ## JDBC Driver Examples
 
@@ -67,29 +67,29 @@ The connector supports various Hive-compatible JDBC drivers:
 
 ### Apache Hive
 ```properties
-datameshmanager.client.hive.connection.driver-class-name=org.apache.hive.jdbc.HiveDriver
-datameshmanager.client.hive.connection.jdbc-url=jdbc:hive2://localhost:10000/default
+entropydata.client.hive.connection.driver-class-name=org.apache.hive.jdbc.HiveDriver
+entropydata.client.hive.connection.jdbc-url=jdbc:hive2://localhost:10000/default
 ```
 
 ### Apache Impala
 **Note**: Requires the Impala JDBC driver JAR file to be present in the `/drivers` folder. Maven will automatically include all JARs from this folder in the build.
 ```properties
-datameshmanager.client.hive.connection.driver-class-name=org.apache.impala.jdbc.jdbc41.Driver
-datameshmanager.client.hive.connection.jdbc-url=jdbc:impala://localhost:21000/default
+entropydata.client.hive.connection.driver-class-name=org.apache.impala.jdbc.jdbc41.Driver
+entropydata.client.hive.connection.jdbc-url=jdbc:impala://localhost:21000/default
 ```
 
 ### Cloudera Hive
 **Note**: Requires the Cloudera Hive JDBC driver JAR file to be present in the `/drivers` folder. Maven will automatically include all JARs from this folder in the build.
 ```properties
-datameshmanager.client.hive.connection.driver-class-name=com.cloudera.hive.jdbc.HS2Driver
-datameshmanager.client.hive.connection.jdbc-url=jdbc:hive2://localhost:10000/default
+entropydata.client.hive.connection.driver-class-name=com.cloudera.hive.jdbc.HS2Driver
+entropydata.client.hive.connection.jdbc-url=jdbc:hive2://localhost:10000/default
 ```
 
 ### Cloudera Impala
 **Note**: Requires the Cloudera Impala JDBC driver JAR file to be present in the `/drivers` folder. Maven will automatically include all JARs from this folder in the build.
 ```properties
-datameshmanager.client.hive.connection.driver-class-name=com.cloudera.impala.jdbc.Driver
-datameshmanager.client.hive.connection.jdbc-url=jdbc:impala://localhost:21050/default
+entropydata.client.hive.connection.driver-class-name=com.cloudera.impala.jdbc.Driver
+entropydata.client.hive.connection.jdbc-url=jdbc:impala://localhost:21050/default
 ```
 
 ## JDBC Driver Setup
@@ -170,9 +170,9 @@ This script:
 
 2. Configure the connector to use the local Hive instance in `application-local.properties`:
    ```properties
-   datameshmanager.client.hive.connection.host=localhost
-   datameshmanager.client.hive.connection.port=10000
-   datameshmanager.client.hive.connection.jdbc-url=jdbc:hive2://localhost:10000/default
+   entropydata.client.hive.connection.host=localhost
+   entropydata.client.hive.connection.port=10000
+   entropydata.client.hive.connection.jdbc-url=jdbc:hive2://localhost:10000/default
    ```
 
 3. Test the connection using Beeline:
@@ -199,7 +199,7 @@ mvn spring-boot:run
 
 ### Run the JAR directly
 ```bash
-java -jar target/datamesh-manager-connector-hive-0.0.1-SNAPSHOT.jar
+java -jar target/entropy-data-connector-hive-0.0.1-SNAPSHOT.jar
 ```
 
 ### Docker
@@ -210,7 +210,7 @@ java -jar target/datamesh-manager-connector-hive-0.0.1-SNAPSHOT.jar
 mvn clean package
 
 # Build the Docker image
-docker build -t datamesh-manager-connector-hive .
+docker build -t entropy-data-connector-hive .
 ```
 
 #### Running with Docker
@@ -218,23 +218,23 @@ docker build -t datamesh-manager-connector-hive .
 # Run with external configuration file
 docker run -p 8080:8080 \
   -v $(pwd)/application.properties:/app/application.properties \
-  datamesh-manager-connector-hive
+  entropy-data-connector-hive
 
 # Run with environment variables
 docker run -p 8080:8080 \
-  -e DATAMESHMANAGER_CLIENT_HOST=https://api.datamesh-manager.com \
-  -e DATAMESHMANAGER_CLIENT_APIKEY=your-api-key \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_HOST=your-hive-host \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PORT=10000 \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_USERNAME=your-username \
-  -e DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PASSWORD=your-password \
-  datamesh-manager-connector-hive
+  -e ENTROPYDATA_CLIENT_HOST=https://api.entropy-data.com \
+  -e ENTROPYDATA_CLIENT_APIKEY=your-api-key \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_HOST=your-hive-host \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_PORT=10000 \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_USERNAME=your-username \
+  -e ENTROPYDATA_CLIENT_HIVE_CONNECTION_PASSWORD=your-password \
+  entropy-data-connector-hive
 
 # Run with custom JDBC drivers
 docker run -p 8080:8080 \
   -v $(pwd)/drivers:/app/drivers \
   -v $(pwd)/application.properties:/app/application.properties \
-  datamesh-manager-connector-hive
+  entropy-data-connector-hive
 ```
 
 #### Docker Image Details
@@ -249,12 +249,12 @@ Spring Boot automatically converts environment variables to configuration proper
 
 | Environment Variable | Configuration Property |
 |---------------------|----------------------|
-| `DATAMESHMANAGER_CLIENT_HOST` | `datameshmanager.client.host` |
-| `DATAMESHMANAGER_CLIENT_APIKEY` | `datameshmanager.client.apikey` |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_HOST` | `datameshmanager.client.hive.connection.host` |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PORT` | `datameshmanager.client.hive.connection.port` |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_USERNAME` | `datameshmanager.client.hive.connection.username` |
-| `DATAMESHMANAGER_CLIENT_HIVE_CONNECTION_PASSWORD` | `datameshmanager.client.hive.connection.password` |
+| `ENTROPYDATA_CLIENT_HOST` | `entropydata.client.host` |
+| `ENTROPYDATA_CLIENT_APIKEY` | `entropydata.client.apikey` |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_HOST` | `entropydata.client.hive.connection.host` |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_PORT` | `entropydata.client.hive.connection.port` |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_USERNAME` | `entropydata.client.hive.connection.username` |
+| `ENTROPYDATA_CLIENT_HIVE_CONNECTION_PASSWORD` | `entropydata.client.hive.connection.password` |
 
 ## Authentication and Security
 
@@ -290,7 +290,7 @@ The application exposes actuator endpoints for monitoring:
 Enable debug logging for more detailed information:
 
 ```properties
-logging.level.datameshmanager.hive=DEBUG
+logging.level.entropydata.hive=DEBUG
 ```
 
 ## License
