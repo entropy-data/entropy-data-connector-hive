@@ -1,14 +1,14 @@
-package datameshmanager.hive;
+package entropydata.hive;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import datameshmanager.sdk.DataMeshManagerAssetsProvider;
-import datameshmanager.sdk.DataMeshManagerStateRepository;
-import datameshmanager.sdk.client.model.Asset;
-import datameshmanager.sdk.client.model.AssetColumnsInner;
-import datameshmanager.sdk.client.model.AssetInfo;
-import datameshmanager.sdk.client.model.AssetRelationshipsInner;
+import entropydata.sdk.EntropyDataAssetsProvider;
+import entropydata.sdk.EntropyDataStateRepository;
+import entropydata.sdk.client.model.Asset;
+import entropydata.sdk.client.model.AssetColumnsInner;
+import entropydata.sdk.client.model.AssetInfo;
+import entropydata.sdk.client.model.AssetRelationshipsInner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,16 +34,16 @@ import java.util.Map;
  * - They are sanitized and quoted using quoteIdentifier() method
  * - Any actual parameter values (like LIMIT numbers) use proper prepared statement parameters
  */
-public class HiveAssetsSupplier implements DataMeshManagerAssetsProvider {
+public class HiveAssetsSupplier implements EntropyDataAssetsProvider {
 
   private static final Logger log = LoggerFactory.getLogger(HiveAssetsSupplier.class);
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
   private final HiveProperties properties;
-  private final DataMeshManagerStateRepository stateRepository;
+  private final EntropyDataStateRepository stateRepository;
 
   public HiveAssetsSupplier(HiveProperties properties,
-      DataMeshManagerStateRepository stateRepository) {
+      EntropyDataStateRepository stateRepository) {
     this.properties = properties;
     this.stateRepository = stateRepository;
   }

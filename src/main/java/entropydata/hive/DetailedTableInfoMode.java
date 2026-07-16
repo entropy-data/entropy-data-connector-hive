@@ -1,4 +1,4 @@
-package datameshmanager.hive;
+package entropydata.hive;
 
 /**
  * Enumeration for handling detailed table information from DESCRIBE EXTENDED.
