@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entropydata.sdk.EntropyDataAssetsProvider;
 import entropydata.sdk.EntropyDataStateRepository;
 import entropydata.sdk.client.model.Asset;
-import entropydata.sdk.client.model.AssetColumnsInner;
+import entropydata.sdk.client.model.AssetColumn;
 import entropydata.sdk.client.model.AssetInfo;
 import entropydata.sdk.client.model.AssetRelationshipsInner;
 import org.slf4j.Logger;
@@ -242,7 +242,7 @@ public class HiveAssetsSupplier implements EntropyDataAssetsProvider {
         }
 
         // Process regular columns only if not in detailed section
-        AssetColumnsInner column = new AssetColumnsInner();
+        AssetColumn column = new AssetColumn();
         column.setName(columnName);
         column.setType(columnType);
         column.setDescription(comment != null && !comment.isEmpty() ? comment : "");
@@ -267,7 +267,7 @@ public class HiveAssetsSupplier implements EntropyDataAssetsProvider {
           String columnName = metaData.getColumnName(i);
           String columnType = metaData.getColumnTypeName(i);
 
-          AssetColumnsInner column = new AssetColumnsInner();
+          AssetColumn column = new AssetColumn();
           column.setName(columnName);
           column.setType(columnType);
           column.setDescription("");
