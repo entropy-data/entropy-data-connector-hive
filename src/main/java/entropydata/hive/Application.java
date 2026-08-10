@@ -28,17 +28,25 @@ public class Application {
         return new EntropyDataClient(host, apiKey);
     }
 
+    @Bean
+    @ConditionalOnProperty(value = "entropydata.client.hive.assets.enabled", havingValue = "true")
+    public AssetsSynchronizationHealth assetsSynchronizationHealth(HiveProperties hiveProperties) {
+        return new AssetsSynchronizationHealth(hiveProperties.assets().pollinterval());
+    }
+
     @Bean(destroyMethod = "stop")
     @ConditionalOnProperty(value = "entropydata.client.hive.assets.enabled", havingValue = "true")
     public EntropyDataAssetsSynchronizer entropyDataAssetsSynchronizer(
             HiveProperties hiveProperties,
             EntropyDataClient client,
+            AssetsSynchronizationHealth assetsSynchronizationHealth,
             TaskExecutor taskExecutor) {
         try {
             var connectorId = hiveProperties.assets().connectorid();
             var stateRepository = new EntropyDataStateRepositoryRemote(connectorId, client);
             var assetsSupplier = new HiveAssetsSupplier(hiveProperties, stateRepository);
-            var entropyDataAssetsSynchronizer = new EntropyDataAssetsSynchronizer(connectorId, client, assetsSupplier);
+            var entropyDataAssetsSynchronizer = new EntropyDataAssetsSynchronizer(connectorId, client,
+                    assetsSynchronizationHealth.wrap(assetsSupplier));
             if (hiveProperties.assets().pollinterval() != null) {
                 entropyDataAssetsSynchronizer.setDelay(hiveProperties.assets().pollinterval());
             }
