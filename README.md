@@ -47,6 +47,25 @@ docker run \
 | `ENTROPYDATA_CLIENT_HIVE_ASSETS_OWNER` | | Default owner team ID for all assets. |
 
 
+## Resources
+
+The connector needs **at least 1 GB of container memory**. The image sets a heap limit accordingly:
+
+```
+JAVA_TOOL_OPTIONS=-XX:MaxRAMPercentage=60 -XX:+ExitOnOutOfMemoryError
+```
+
+Without `MaxRAMPercentage`, the JVM caps the heap at 25% of the container memory. `ExitOnOutOfMemoryError` terminates the
+container instead of leaving it running with a dead synchronization thread, so that your orchestrator can restart it.
+
+Setting `JAVA_TOOL_OPTIONS` at runtime **replaces** these flags rather than adding to them. Repeat the flags you want to keep:
+
+```
+-e JAVA_TOOL_OPTIONS='-XX:MaxRAMPercentage=60 -XX:+ExitOnOutOfMemoryError -javaagent:/agent.jar'
+```
+
+Expect the container to use around 60% of its memory limit under load. Adjust memory alarms accordingly.
+
 ## Supported Systems
 
 - Apache Hive
