@@ -31,7 +31,7 @@ docker run \
 Every release is published as an immutable image tag. Pin a version rather than following `latest`:
 
 ```
-entropydata/entropy-data-connector-hive:0.9.0
+entropydata/entropy-data-connector-hive:0.3.0
 ```
 
 | Tag | Meaning |
@@ -43,7 +43,7 @@ entropydata/entropy-data-connector-hive:0.9.0
 Release images are signed with [cosign](https://docs.sigstore.dev/), and carry an SBOM and build provenance:
 
 ```
-cosign verify entropydata/entropy-data-connector-hive:0.9.0 \
+cosign verify entropydata/entropy-data-connector-hive:0.3.0 \
   --certificate-identity-regexp 'https://github.com/entropy-data/entropy-data-connector-hive/.*' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
